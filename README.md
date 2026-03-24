@@ -1,16 +1,21 @@
 # Movie Recommendation System
 
-A deployable movie recommendation web app built with Python, Streamlit, pandas, and scikit-learn.
+A deployable Netflix-style movie recommendation web app built with Python, Streamlit, pandas, and scikit-learn.
 
 ## Features
 
 - Content-based recommendation using TF-IDF
 - Cosine similarity to find similar movies
-- Interactive web interface
+- Netflix-style dark streaming interface
 - Hollywood and Bollywood support
 - Industry, genre, and release-year filters
 - Runtime CSV upload and downloadable template
-- Dataset preview and top-rated movie view
+- Featured hero banner and movie spotlight
+- Movie poster display for every title
+- Personalized recommendation rows like "Top Picks For You"
+- Trending, new release, and top-rated browsing sections
+- Dataset preview and detailed recommendation table
+- Includes a larger imported Bollywood movie dataset
 - Ready for local run and cloud deployment
 
 ## Project File
@@ -47,16 +52,16 @@ streamlit run "Recommendation system.py"
 
 ## Dataset Format
 
-Use this column order in your CSV files:
+Use this column order in your CSV files. The last column is optional:
 
 ```text
-title,industry,genre,year,director,cast,rating,description
+title,industry,genre,year,director,cast,rating,description,poster_url
 ```
 
 Example row:
 
 ```text
-Inception,Hollywood,Sci-Fi Action Thriller,2010,Christopher Nolan,"Leonardo DiCaprio, Joseph Gordon-Levitt",8.8,A thief enters dreams to steal secrets and plant ideas.
+Inception,Hollywood,Sci-Fi Action Thriller,2010,Christopher Nolan,"Leonardo DiCaprio, Joseph Gordon-Levitt",8.8,A thief enters dreams to steal secrets and plant ideas.,https://example.com/inception.jpg
 ```
 
 ## Deployment Options
@@ -106,6 +111,17 @@ The system is content-based:
 - cosine similarity compares movies
 - the highest similarity scores are returned as recommendations
 
+## User Experience
+
+The interface is designed to feel closer to a streaming platform than a plain analytics dashboard. It includes:
+
+- a cinematic featured section for the selected movie
+- poster-style movie artwork in each row
+- personalized recommendation shelves
+- searchable movie browsing
+- quick filters for industry, genre, and year
+- a detailed table view for comparing recommended titles
+
 ## Expand the Dataset
 
 The app now reads from any of these files if they exist:
@@ -114,10 +130,12 @@ The app now reads from any of these files if they exist:
 - `data/hollywood_movies.csv`
 - `data/bollywood_movies.csv`
 
+This project now includes a generated `data/bollywood_movies.csv` created from the provided Bollywood movie archive.
+
 You can keep adding more Hollywood and Bollywood movies by appending rows with these columns:
 
 ```text
-title,industry,genre,year,director,cast,rating,description
+title,industry,genre,year,director,cast,rating,description,poster_url
 ```
 
 Template files are included:
@@ -126,9 +144,11 @@ Template files are included:
 - `data/bollywood_movies_template.csv`
 
 You can also upload a dataset directly in the sidebar without changing project files.
+If `poster_url` is left empty, the app generates a poster-style placeholder automatically.
 
 ## Notes
 
 - This recommender is content-based, not collaborative filtering.
 - Recommendation quality depends on the quality and completeness of your dataset.
+- Some imported datasets may use a normalized movie `score` rather than a true IMDb rating.
 - To scale to a very large catalog, keep expanding the CSV files in `data/`.
